@@ -2,3 +2,4 @@
 credentials.txt
 sonar-project.properties
 .scannerwork/
+.DS_Store
