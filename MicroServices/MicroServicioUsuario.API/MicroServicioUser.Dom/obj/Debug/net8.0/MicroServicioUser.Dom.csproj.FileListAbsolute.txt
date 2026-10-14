@@ -1,0 +1,12 @@
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\bin\Debug\net8.0\MicroServicioUser.Dom.deps.json
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\bin\Debug\net8.0\MicroServicioUser.Dom.dll
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\bin\Debug\net8.0\MicroServicioUser.Dom.pdb
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\MicroServicioUser.Dom.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\MicroServicioUser.Dom.AssemblyInfoInputs.cache
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\MicroServicioUser.Dom.AssemblyInfo.cs
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\MicroServicioUser.Dom.csproj.CoreCompileInputs.cache
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\MicroServicioUser.Dom.sourcelink.json
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\MicroServicioUser.Dom.dll
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\refint\MicroServicioUser.Dom.dll
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\MicroServicioUser.Dom.pdb
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.Dom\obj\Debug\net8.0\ref\MicroServicioUser.Dom.dll
