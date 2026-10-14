@@ -1,0 +1,16 @@
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\bin\Debug\net8.0\MicroServicoUser.Inf.deps.json
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\bin\Debug\net8.0\MicroServicoUser.Inf.dll
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\bin\Debug\net8.0\MicroServicoUser.Inf.pdb
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\bin\Debug\net8.0\MicroServicioUser.Dom.dll
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\bin\Debug\net8.0\MicroServicioUser.Dom.pdb
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.csproj.AssemblyReference.cache
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.AssemblyInfoInputs.cache
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.AssemblyInfo.cs
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.csproj.CoreCompileInputs.cache
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.sourcelink.json
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroSer.D4079377.Up2Date
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.dll
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\refint\MicroServicoUser.Inf.dll
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\MicroServicoUser.Inf.pdb
+C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicoUser.Inf\obj\Debug\net8.0\ref\MicroServicoUser.Inf.dll
