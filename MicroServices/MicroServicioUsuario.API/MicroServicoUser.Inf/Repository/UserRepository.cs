@@ -12,8 +12,8 @@ namespace MicroServicoUser.Inf.Repository
     }
     public class UserRepository : IRepository
     {
-        private readonly MySqlConnectionManager _dbConnectionManager;
-        public UserRepository(MySqlConnectionManager dbConnectionManager)
+        private readonly IMySqlConnectionManager _dbConnectionManager;
+        public UserRepository(IMySqlConnectionManager dbConnectionManager)
         {
             _dbConnectionManager = dbConnectionManager;
         }

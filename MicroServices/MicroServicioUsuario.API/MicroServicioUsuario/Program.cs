@@ -16,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 //Mysql
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddSingleton<MicroServicoUser.Inf.Persistence.Database.MySqlConnectionManager>();
+builder.Services.AddSingleton<MicroServicoUser.Inf.Persistence.Database.IMySqlConnectionManager>(
+    services => services.GetRequiredService<MicroServicoUser.Inf.Persistence.Database.MySqlConnectionManager>());
 
 //Inyeccion de capas
 builder.Services.AddScoped<IRepository, UserRepository>();
