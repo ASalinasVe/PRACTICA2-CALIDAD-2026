@@ -4,7 +4,7 @@ using System.Data;
 
 namespace MicroServicoUser.Inf.Persistence.Database;
 
-public class MySqlConnectionManager
+public class MySqlConnectionManager : IMySqlConnectionManager
 {
     private readonly string _connectionString;
     public MySqlConnectionManager(IConfiguration configuration)
