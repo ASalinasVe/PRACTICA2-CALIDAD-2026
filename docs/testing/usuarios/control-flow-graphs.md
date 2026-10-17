@@ -8,7 +8,7 @@ Se analizaron los cuerpos de métodos escritos en los proyectos API, App, Dom e 
 
 Se excluyeron archivos generados, carpetas bin/ y obj/, el proyecto de pruebas, interfaces sin implementación, propiedades/accesores automáticos y declaraciones sin cuerpo. Las dos propiedades calculadas con cuerpo explícito se incluyen en un apéndice separado y no se suman al conteo de métodos. Las llamadas a otros métodos o bibliotecas se representan como bloques; no se expanden. Las expresiones SQL dentro de literales se tratan como datos, no como decisiones del flujo C#.
 
-Cada grafo es de flujo normal salvo las aristas de excepción indicadas explícitamente. Los catch se conectan desde el bloque try que los contiene. Las excepciones que una llamada externa pudiera lanzar fuera de un try/catch no se predicen: su condición depende del runtime/proveedor. Las etiquetas “Sí/No” se refieren a la condición del nodo indicado. No se calcula V(G).
+Cada grafo es de flujo normal salvo las aristas de excepción indicadas explícitamente. Los catch se conectan desde el bloque try que los contiene. Las excepciones que una llamada externa pudiera lanzar fuera de un try/catch no se predicen: su condición depende del runtime/proveedor. Las etiquetas “Sí/No” se refieren a la condición del nodo indicado. V(G) no se calcula en general; cuando un ticket requiere el análisis, sus valores se documentan en la sección del método correspondiente.
 
 ## Índice de métodos
 
@@ -81,7 +81,10 @@ Cada grafo es de flujo normal salvo las aristas de excepción indicadas explíci
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteParameterizedNonQuery&lt;T&gt;(string, T) | 32–36 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteNonQuery(string) | 38–42 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteCommand(MySqlCommand) | 44–51 |
-| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteCommand&lt;T&gt;(MySqlCommand) | 52–65 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteCommand&lt;T&gt;(MySqlCommand) | 52–58 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.LoadDataTable(MySqlCommand) | 60–72 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.OpenConnection(MySqlConnection) | 74 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteMySqlCommand(MySqlCommand) | 76 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/DbParameterHelper.cs | DbParameterHelper.PopulateCommandParameters&lt;T&gt;(string, T) | 10–41 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/DbMapper.cs | DbMapper.MapDataRowToModel&lt;T&gt;(DataRow) | 10–38 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/DbMapper.cs | DbMapper.MapDataTableToModelIterable&lt;T&gt;(DataTable) | 40–49 |
@@ -2270,7 +2273,7 @@ flowchart TD
 | N2 → N3 | comando creado | 19 |
 | N3 → N4 | return | 19 |
 
-**Puntos de decisión:** ninguno. No se expanden PopulateCommandParameters ni ExecuteCommand.
+**Puntos de decisión:** ninguno en este cuerpo. El flujo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1): `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`; R = 1, D = 0 y D + 1 = 1. Hay un camino independiente, cubierto por `MySqlConnectionManagerExecuteParameterizedQueryTests.ExecuteParameterizedQuery_WithMatchingParameter_ReturnsMappedRow`. La prueba verifica la creación del parámetro `@Id`, el valor enviado y el mapeo de la fila de respuesta. No se expanden `PopulateCommandParameters` ni `ExecuteCommand` en este grafo.
 
 ### MySqlConnectionManager.ExecuteParameterizedQuery&lt;TOut,TParam&gt;
 
@@ -2453,59 +2456,149 @@ flowchart TD
 | N5 → N6 | ejecución completada | 50 |
 | N6 → N7 | return | 50 |
 
-**Puntos de decisión:** ninguno escrito. Open/ExecuteNonQuery pueden lanzar excepciones que no se capturan aquí; la ruta concreta depende del proveedor y el runtime.
+**Puntos de decisión:** ninguno en este cuerpo. Hay 7 nodos (N = 7), 6 aristas (E = 6) y un componente conectado (P = 1), por tanto `V(G) = E - N + 2P = 6 - 7 + 2(1) = 1`. El grafo tiene una región (R = 1), cero nodos predicado (D = 0) y `D + 1 = 1`; los tres métodos coinciden. El único camino independiente crea y asigna la conexión, la abre, ejecuta el comando y devuelve el conteo afectado. Lo cubre `MySqlConnectionManagerExecuteCommandNonQueryTests.ExecuteCommand_WithParameterizedUpdate_ReturnsAffectedRowCount`, que invoca este método a través de `ExecuteParameterizedNonQuery` y sustituye la apertura y la ejecución del driver para no requerir un servidor MySQL. Las excepciones del proveedor no se capturan en este cuerpo.
 
 ### MySqlConnectionManager.ExecuteCommand&lt;T&gt;
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs  
-**Firma:** private IEnumerable&lt;T&gt; ExecuteCommand&lt;T&gt;(MySqlCommand command) where T : new()  
-**Líneas:** 52–65. Ejecuta consulta en DataAdapter, carga DataTable y delega el mapeo.
+**Firma:** protected virtual IEnumerable&lt;T&gt; ExecuteCommand&lt;T&gt;(MySqlCommand command) where T : new()
+**Líneas:** 52–58. Obtiene el DataTable y mapea sus filas al tipo T.
 
 ~~~csharp
-0052 | private IEnumerable<T> ExecuteCommand<T>(MySqlCommand command) where T : new()
-0054 | using MySqlConnection connection = CreateConnection();
-0056 | command.Connection = connection;
-0057 | connection.Open();
-0059 | using MySqlDataAdapter adapter = new(command);
-0060 | DataTable dataTable = new();
-0061 | adapter.Fill(dataTable);
-0063 | IEnumerable<T> results = DbMapper.MapDataTableToModelIterable<T>(dataTable);
-0064 | return results;
+0052 | protected virtual IEnumerable<T> ExecuteCommand<T>(MySqlCommand command) where T : new()
+0054 | DataTable dataTable = LoadDataTable(command);
+0056 | IEnumerable<T> results = DbMapper.MapDataTableToModelIterable<T>(dataTable);
+0057 | return results;
 ~~~
 
 ~~~mermaid
 flowchart TD
-    N1([Entrada]) --> N2[Crear conexión]
-    N2 --> N3[Asociar conexión y Open]
-    N3 --> N4[Crear adapter y DataTable]
-    N4 --> N5[adapter.Fill]
-    N5 --> N6[DbMapper.MapDataTableToModelIterable]
-    N6 --> N7[return results]
-    N7 --> N8([Salida])
+    N1([Entrada]) --> N2[LoadDataTable]
+    N2 --> N3[DbMapper.MapDataTableToModelIterable]
+    N3 --> N4[return results]
+    N4 --> N5([Salida])
 ~~~
 
 | Nodo | Líneas | Fragmento o instrucción | Condición o acción |
 |---|---:|---|---|
 | N1 | 52–53 | Entrada | Entrada |
-| N2 | 54 | CreateConnection() | Crear conexión |
-| N3 | 56–57 | Asignar conexión; abrir | Preparar acceso |
-| N4 | 59–60 | Crear adapter y DataTable | Preparar lectura |
-| N5 | 61 | adapter.Fill(dataTable) | Cargar filas |
-| N6 | 63 | DbMapper.MapDataTableToModelIterable&lt;T&gt; | Mapear resultados |
-| N7 | 64 | return results | Devolver colección |
-| N8 | 65 | Fin | Salida |
+| N2 | 54 | LoadDataTable(command) | Obtener filas consultadas |
+| N3 | 56 | DbMapper.MapDataTableToModelIterable&lt;T&gt; | Mapear filas |
+| N4 | 57 | return results | Devolver colección |
+| N5 | 58 | Fin | Salida |
 
 | Origen → destino | Etiqueta | Línea |
 |---|---|---:|
 | N1 → N2 | secuencia | 54 |
-| N2 → N3 | conexión creada | 56 |
-| N3 → N4 | conexión abierta | 59 |
-| N4 → N5 | objetos creados | 61 |
-| N5 → N6 | Fill completado | 63 |
-| N6 → N7 | mapeo completado | 64 |
-| N7 → N8 | return | 64 |
+| N2 → N3 | tabla cargada | 56 |
+| N3 → N4 | mapeo completado | 57 |
+| N4 → N5 | return | 57 |
 
-**Puntos de decisión:** ninguno escrito. Las llamadas al proveedor/reflection pueden lanzar excepciones no capturadas; su condición concreta depende del runtime.
+**Puntos de decisión:** ninguno. El flujo lineal tiene 5 nodos (N = 5), 4 aristas (E = 4) y un componente conectado (P = 1). `V(G) = E - N + 2P = 4 - 5 + 2(1) = 1`; regiones R = 1; nodos predicado D = 0, por lo que D + 1 = 1. Los tres métodos coinciden. Hay un camino independiente que cubre la llamada de carga, el mapeo y el retorno; lo cubre `MySqlConnectionManagerExecuteCommandTests.ExecuteQuery_WithCompatibleDatabaseRow_ReturnsMappedModel` al invocar este método mediante `ExecuteQuery<T>`. El comentario del ticket anotó `2 - 3 + 2 = 1`, pero esos conteos no corresponden al grafo; aquí quedan registrados los conteos reales.
+
+### MySqlConnectionManager.LoadDataTable
+
+**Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs
+**Firma:** protected virtual DataTable LoadDataTable(MySqlCommand command)
+**Líneas:** 60–72. Ejecuta el comando con MySQL y devuelve la tabla cargada. Se deja virtual para sustituir solo el acceso externo cuando se prueba ExecuteCommand.
+
+~~~csharp
+0060 | protected virtual DataTable LoadDataTable(MySqlCommand command)
+0062 | using MySqlConnection connection = CreateConnection();
+0064–0065 | Asociar comando y abrir conexión
+0067–0068 | Crear MySqlDataAdapter y DataTable
+0069 | adapter.Fill(dataTable);
+0071 | return dataTable;
+~~~
+
+~~~mermaid
+flowchart TD
+    N1([Entrada]) --> N2[Crear conexión]
+    N2 --> N3[Asociar comando y abrir conexión]
+    N3 --> N4[Crear adapter y DataTable]
+    N4 --> N5[Fill]
+    N5 --> N6[return dataTable]
+    N6 --> N7([Salida])
+~~~
+
+| Nodo | Líneas | Fragmento o instrucción | Condición o acción |
+|---|---:|---|---|
+| N1 | 60–61 | Entrada | Entrada |
+| N2 | 62 | CreateConnection() | Crear conexión |
+| N3 | 64–65 | Asociar comando y abrir conexión | Preparar acceso |
+| N4 | 67–68 | Crear adapter y DataTable | Preparar lectura |
+| N5 | 69 | adapter.Fill(dataTable) | Cargar filas |
+| N6 | 71 | return dataTable | Devolver tabla |
+| N7 | 72 | Fin | Salida |
+
+| Origen → destino | Etiqueta | Línea |
+|---|---|---:|
+| N1 → N2 | secuencia | 62 |
+| N2 → N3 | conexión creada | 64 |
+| N3 → N4 | conexión abierta | 67 |
+| N4 → N5 | objetos creados | 69 |
+| N5 → N6 | Fill completado | 71 |
+| N6 → N7 | return | 71 |
+
+**Puntos de decisión:** ninguno escrito. Hay 7 nodos, 6 aristas y P = 1, por tanto `V(G) = 6 - 7 + 2 = 1`; R = 1 y D + 1 = 1.
+
+### MySqlConnectionManager.OpenConnection
+
+**Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs
+**Firma:** protected virtual void OpenConnection(MySqlConnection connection)
+**Línea:** 74. Delegación de la apertura al proveedor; se puede sustituir en pruebas unitarias.
+
+~~~csharp
+0074 | protected virtual void OpenConnection(MySqlConnection connection) => connection.Open();
+~~~
+
+~~~mermaid
+flowchart TD
+    N1([Entrada]) --> N2[connection.Open]
+    N2 --> N3([Salida])
+~~~
+
+| Nodo | Líneas | Fragmento o instrucción | Condición o acción |
+|---|---:|---|---|
+| N1 | 74 | Entrada | Entrada |
+| N2 | 74 | connection.Open() | Abrir conexión |
+| N3 | 74 | Fin | Salida |
+
+| Origen → destino | Etiqueta | Línea |
+|---|---|---:|
+| N1 → N2 | secuencia | 74 |
+| N2 → N3 | apertura completada | 74 |
+
+**Puntos de decisión:** ninguno. `V(G) = 2 - 3 + 2(1) = 1`; R = 1 y D + 1 = 1.
+
+### MySqlConnectionManager.ExecuteMySqlCommand
+
+**Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs
+**Firma:** protected virtual int ExecuteMySqlCommand(MySqlCommand command)
+**Línea:** 76. Delegación de la ejecución al proveedor; se puede sustituir en pruebas unitarias.
+
+~~~csharp
+0076 | protected virtual int ExecuteMySqlCommand(MySqlCommand command) => command.ExecuteNonQuery();
+~~~
+
+~~~mermaid
+flowchart TD
+    N1([Entrada]) --> N2[command.ExecuteNonQuery]
+    N2 --> N3([Salida con filas afectadas])
+~~~
+
+| Nodo | Líneas | Fragmento o instrucción | Condición o acción |
+|---|---:|---|---|
+| N1 | 76 | Entrada | Entrada |
+| N2 | 76 | command.ExecuteNonQuery() | Ejecutar |
+| N3 | 76 | Resultado de la expresión | Devolver conteo |
+
+| Origen → destino | Etiqueta | Línea |
+|---|---|---:|
+| N1 → N2 | secuencia | 76 |
+| N2 → N3 | ejecución completada | 76 |
+
+**Puntos de decisión:** ninguno. `V(G) = 2 - 3 + 2(1) = 1`; R = 1 y D + 1 = 1.
 
 
 ## Clase DbParameterHelper
