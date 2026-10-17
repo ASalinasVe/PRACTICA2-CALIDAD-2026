@@ -2222,6 +2222,16 @@ flowchart TD
 
 **Puntos de decisión:** foreach en línea 75 e if con el patrón relacional completo ch is >= 'a' and <= 'z' en línea 77.
 
+**Complejidad ciclomática y pruebas de PEB-49:** el grafo tiene 7 nodos (N = 7), 8 aristas (E = 8) y un componente conectado (P = 1): `V(G) = E - N + 2P = 8 - 7 + 2(1) = 3`. Tiene tres regiones (R = 3) y dos nodos predicado (D = 2), así que `D + 1 = 3`; los tres cálculos coinciden. Hay tres caminos independientes: cero iteraciones; una iteración que descarta un carácter; y una iteración que conserva un carácter. Los casos del comentario se implementan como tres pruebas individuales en `RegistrationSlugifyLettersTests`:
+
+| Caso | Entrada → resultado esperado | Prueba | Camino/ramas ejercitadas |
+|---|---|---|---|
+| 1 | `""` → `""` | `SlugifyLetters_WithEmptyText_ReturnsEmptyString` | El `foreach` no entra y retorna vacío. |
+| 2 | `"123!"` → `""` | `SlugifyLetters_WithNumbersAndSymbols_ReturnsEmptyString` | El `foreach` entra y descarta los caracteres fuera de `a-z`. |
+| 3 | `"ÁBC"` → `"abc"` | `SlugifyLetters_WithAccentedUppercaseText_ReturnsLowercaseAsciiLetters` | Quita el diacrítico, convierte a minúsculas y conserva las letras válidas. |
+
+`SlugifyLetters` es local a `RegisterUser`; las pruebas invocan su método privado generado mediante reflexión, sin cambiar la API de producción. En la ejecución con Cobertura, `SlugifyLetters` reportó 100 % de líneas y 100 % de ramas.
+
 
 ## Clase MySqlConnectionManager
 
