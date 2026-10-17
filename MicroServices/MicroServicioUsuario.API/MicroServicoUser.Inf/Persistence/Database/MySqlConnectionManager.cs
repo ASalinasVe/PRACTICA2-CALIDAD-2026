@@ -41,15 +41,23 @@ public class MySqlConnectionManager : IMySqlConnectionManager
         return ExecuteCommand(command);
     }
 
-    private int ExecuteCommand(MySqlCommand command)
+    protected virtual int ExecuteCommand(MySqlCommand command)
     {
         using MySqlConnection connection = CreateConnection();
         command.Connection = connection;
-        connection.Open();
-        int affectedRows = command.ExecuteNonQuery();
+        OpenConnection(connection);
+        int affectedRows = ExecuteMySqlCommand(command);
         return affectedRows;
     }
-    private IEnumerable<T> ExecuteCommand<T>(MySqlCommand command) where T : new()
+    protected virtual IEnumerable<T> ExecuteCommand<T>(MySqlCommand command) where T : new()
+    {
+        DataTable dataTable = LoadDataTable(command);
+
+        IEnumerable<T> results = DbMapper.MapDataTableToModelIterable<T>(dataTable);
+        return results;
+    }
+
+    protected virtual DataTable LoadDataTable(MySqlCommand command)
     {
         using MySqlConnection connection = CreateConnection();
 
@@ -60,7 +68,10 @@ public class MySqlConnectionManager : IMySqlConnectionManager
         DataTable dataTable = new();
         adapter.Fill(dataTable);
 
-        IEnumerable<T> results = DbMapper.MapDataTableToModelIterable<T>(dataTable);
-        return results;
+        return dataTable;
     }
+
+    protected virtual void OpenConnection(MySqlConnection connection) => connection.Open();
+
+    protected virtual int ExecuteMySqlCommand(MySqlCommand command) => command.ExecuteNonQuery();
 }
