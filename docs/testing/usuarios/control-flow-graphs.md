@@ -2307,7 +2307,7 @@ flowchart TD
 | N2 → N3 | comando creado | 24 |
 | N3 → N4 | return | 24 |
 
-**Puntos de decisión:** ninguno. No se expanden las llamadas.
+**Puntos de decisión:** ninguno en este cuerpo. El flujo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1): `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`; R = 1, D = 0 y D + 1 = 1. Hay un camino independiente, cubierto por `MySqlConnectionManagerExecuteParameterizedQueryWithSeparateTypesTests.ExecuteParameterizedQuery_WithSeparateParameterAndResultTypes_ReturnsMappedRow`. La prueba usa un modelo `TParam` distinto de `TOut`, comprueba el parámetro `@Id` y el mapeo del resultado. No se expanden las llamadas.
 
 ### MySqlConnectionManager.ExecuteQuery&lt;T&gt;
 
