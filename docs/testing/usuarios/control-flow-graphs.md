@@ -1917,6 +1917,15 @@ flowchart TD
 
 **Puntos de decisión:** foreach en línea 21.
 
+**Complejidad ciclomática y pruebas de PEB-45:** el grafo tiene 6 nodos (N = 6), 6 aristas (E = 6) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 6 - 6 + 2(1) = 2`. También hay dos regiones (R = 2) y un nodo predicado (D = 1), así que `D + 1 = 2`; los tres métodos coinciden. La base teórica contempla el camino sin iteraciones y el camino con iteraciones. En este método, `ComputeHash` siempre produce 16 bytes, por lo que el camino de cero iteraciones no es alcanzable con una entrada válida y solo hay un camino factible. El ticket pide dos entradas para verificar dos resultados conocidos, implementadas como dos pruebas individuales en `RegistrationHelpersMd5HexTests`:
+
+| Caso | Entrada → resultado esperado | Prueba | Cobertura ejercitada |
+|---|---|---|---|
+| 1 | `""` → `d41d8cd98f00b204e9800998ecf8427e` | `Md5Hex_WithEmptyInput_ReturnsKnownMd5Digest` | Calcula y formatea los 16 bytes del hash de una cadena vacía. |
+| 2 | `"abc"` → `900150983cd24fb0d6963f7d28e17f72` | `Md5Hex_WithAbcInput_ReturnsKnownMd5Digest` | Calcula y formatea los 16 bytes del hash de texto UTF-8. |
+
+Los dos casos cubren la iteración y la salida del `foreach`; ambos ejercitan el mismo camino factible, pero validan resultados diferentes. No se agrega un tercer caso artificial para intentar producir un hash vacío.
+
 ### Registration.GeneratePassword
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Repository/Registration.cs  
