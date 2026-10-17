@@ -2378,7 +2378,7 @@ flowchart TD
 | N2 → N3 | comando listo | 35 |
 | N3 → N4 | return | 35 |
 
-**Puntos de decisión:** ninguno. No hay catch local; fallos de llamadas se propagan.
+**Puntos de decisión:** ninguno en este cuerpo. Hay 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1), así que `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`. El grafo tiene una región (R = 1), cero nodos predicado (D = 0) y `D + 1 = 1`; los tres métodos coinciden. El único camino independiente crea el comando parametrizado y devuelve las filas afectadas; lo cubre `MySqlConnectionManagerExecuteParameterizedNonQueryTests.ExecuteParameterizedNonQuery_WithExistingId_ReturnsAffectedRowCount`. No hay catch local; fallos de llamadas se propagan.
 
 ### MySqlConnectionManager.ExecuteNonQuery
 
