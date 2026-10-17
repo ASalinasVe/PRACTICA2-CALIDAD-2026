@@ -2414,18 +2414,20 @@ flowchart TD
 
 **Puntos de decisión:** ninguno. No hay catch local.
 
+**Complejidad ciclomática y caminos independientes:** el grafo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1). Por aristas y nodos, `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`. Tiene una región (R = 1) y cero nodos predicado (D = 0), por lo que `D + 1 = 1`. Los tres métodos coinciden: `V(G) = 1`; hay un camino independiente que crea el comando y devuelve el conteo delegado, cubierto por `MySqlConnectionManagerExecuteNonQueryTests.ExecuteNonQuery_WithUpdateQuery_ReturnsAffectedRowCount`. El comentario del ticket anotó `2 - 3 + 2 = 1`, pero esos conteos no corresponden al grafo; aquí se registran los valores reales. La prueba sustituye el ejecutor para no depender de un servidor MySQL.
+
 ### MySqlConnectionManager.ExecuteCommand(MySqlCommand)
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs  
-**Firma:** private int ExecuteCommand(MySqlCommand command)  
+**Firma:** protected virtual int ExecuteCommand(MySqlCommand command)
 **Líneas:** 44–51. Abre conexión, ejecuta ExecuteNonQuery y devuelve filas afectadas.
 
 ~~~csharp
-0044 | private int ExecuteCommand(MySqlCommand command)
+0044 | protected virtual int ExecuteCommand(MySqlCommand command)
 0046 | using MySqlConnection connection = CreateConnection();
 0047 | command.Connection = connection;
-0048 | connection.Open();
-0049 | int affectedRows = command.ExecuteNonQuery();
+0048 | OpenConnection(connection);
+0049 | int affectedRows = ExecuteMySqlCommand(command);
 0050 | return affectedRows;
 ~~~
 
