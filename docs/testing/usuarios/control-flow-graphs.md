@@ -1326,6 +1326,15 @@ flowchart TD
 
 **Puntos de decisión:** catch(Exception), línea 87.
 
+**Complejidad ciclomática y pruebas de PEB-36:** el grafo tiene 7 nodos (N = 7), 7 aristas (E = 7) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 7 - 7 + 2(1) = 2`. También tiene dos regiones (R = 2) y un nodo predicado (D = 1), así que `D + 1 = 2`; los tres métodos coinciden. Los dos caminos independientes son la inserción normal y la excepción capturada. Los dos casos del comentario están implementados en `UserRepositoryInsertTests`:
+
+| Caso | Preparación → resultado esperado | Prueba | Camino ejercitado |
+|---|---|---|---|
+| 1 | Usuario válido e `INSERT` exitoso con 1 fila afectada → `Success`, valor `1` | `Insert_WhenDatabaseInsertsUser_ReturnsSuccessAndAffectedRows` | Ejecución normal y retorno exitoso. |
+| 2 | El `INSERT` lanza `Error de conexión` → `Failure` con ese mensaje | `Insert_WhenDatabaseThrows_ReturnsFailureWithExceptionMessage` | Excepción capturada y retorno de fallo. |
+
+Las pruebas usan un `IMySqlConnectionManager` falso para controlar el resultado del `INSERT` y provocar la excepción, sin conectarse a MySQL.
+
 ### UserRepository.Update
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Repository/UserRepository.cs  
