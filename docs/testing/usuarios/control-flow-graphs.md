@@ -2125,6 +2125,25 @@ flowchart TD
 
 **Puntos de decisión:** condición OR de tres operandos en línea 55 (cada operando se evalúa solo si los anteriores son falsos); condición AND en línea 86 (segundo operando solo si el primero es verdadero); if en línea 94; while en línea 99; operador condicional ?: en línea 108; if de inserción y retorno temprano en líneas 126–127. firstName/lastName/email fueron validados en línea 55 antes de las expresiones ?. / ?? de líneas 82–83 y 92; por el flujo normal, sus fallback por null no son alcanzables.
 
+**Complejidad ciclomática y pruebas de PEB-47:** este grafo aislado tiene 25 nodos (N = 25), 33 aristas (E = 33) y un componente conectado (P = 1), así que `V(G) = E - N + 2P = 33 - 25 + 2(1) = 10`. Tiene 10 regiones (R = 10) y nueve nodos predicado (D = 9), por lo que `D + 1 = 10`; los tres métodos coinciden. El comentario del ticket usa N = 27 y E = 35, que también producen 10, pero esos conteos no corresponden a los nodos y aristas enumerados en este grafo. Las llamadas a métodos y los cuerpos de las funciones locales se analizan como unidades separadas, de acuerdo con el criterio del documento; una métrica que las expanda puede dar un valor distinto, pero no cambia este V(G) de `RegisterUser`.
+
+Los 10 casos del comentario están implementados como 10 pruebas individuales en `RegistrationRegisterUserTests`:
+
+| Caso | Entrada/ruta → resultado esperado | Prueba |
+|---|---|---|
+| 1 | `firstName = ""` → fallo por datos obligatorios | `RegisterUser_WhenFirstNameIsMissing_ReturnsRequiredDataFailure` |
+| 2 | `lastName = ""` → fallo por datos obligatorios | `RegisterUser_WhenLastNameIsMissing_ReturnsRequiredDataFailure` |
+| 3 | `email = ""` → fallo por datos obligatorios | `RegisterUser_WhenEmailIsMissing_ReturnsRequiredDataFailure` |
+| 4 | Nombre sin letras ASCII; usa `ana` del email → éxito | `RegisterUser_WhenFirstNameHasNoAsciiLetters_UsesEmailUsername` |
+| 5 | Apellido sin letras ASCII; usa `maria` del email → éxito | `RegisterUser_WhenLastNameHasNoAsciiLetters_UsesEmailUsername` |
+| 6 | Nombre y apellido válidos, usuario libre y rol `Admin` → `a_lopez`, código `1` | `RegisterUser_WhenUsernameIsAvailableAndRoleIsKnown_InsertsUser` |
+| 7 | La parte local `123` del email no genera slug → usuario predeterminado `user` | `RegisterUser_WhenEmailLocalPartHasNoAsciiLetters_UsesDefaultUsername` |
+| 8 | `a_lopez` ocupado y `a_lopez2` libre → usa el sufijo `2` | `RegisterUser_WhenFirstUsernameIsTaken_UsesNextSuffix` |
+| 9 | Rol desconocido → inserta con código `0` | `RegisterUser_WhenRoleIsUnknown_UsesZeroRoleCode` |
+| 10 | Inserción devuelve `Failure("Error al crear usuario")` → `ok = false` con ese error | `RegisterUser_WhenInsertFails_ReturnsInsertError` |
+
+Las pruebas sustituyen `IRepository` para controlar las colisiones de username y el resultado de inserción. En los casos exitosos comprueban que la contraseña generada tenga 10 caracteres y que el usuario insertado guarde su hash, sin depender de un valor aleatorio exacto. La ejecución con Cobertura reportó 100 % de líneas y 82,14 % de ramas (23/28) en la máquina de estado generada para `RegisterUser`. Las cinco ramas restantes pertenecen a los fallback de null de `firstName?.Trim() ?? ""`, `lastName?.Trim() ?? ""` y `(email ?? "")`; no son alcanzables porque el guard de la línea 55 retorna antes si cualquiera de esos argumentos es null. Por tanto, el 28 observado en el XML corresponde al total de resultados de rama instrumentados, no al `V(G) = 10` del grafo aislado.
+
 
 ### Función local Registration.RegisterUser.RemoveDiacritics
 
@@ -2485,8 +2504,8 @@ flowchart TD
 flowchart TD
     N1([Entrada]) --> N2[Crear conexión]
     N2 --> N3[Asignar connection al command]
-    N3 --> N4[Open]
-    N4 --> N5[ExecuteNonQuery]
+    N3 --> N4[OpenConnection]
+    N4 --> N5[ExecuteMySqlCommand]
     N5 --> N6[return affectedRows]
     N6 --> N7([Salida])
 ~~~
@@ -2496,8 +2515,8 @@ flowchart TD
 | N1 | 44–45 | Entrada | Entrada |
 | N2 | 46 | CreateConnection() | Crear conexión |
 | N3 | 47 | command.Connection = connection | Asociar |
-| N4 | 48 | connection.Open() | Abrir |
-| N5 | 49 | ExecuteNonQuery() | Ejecutar |
+| N4 | 48 | OpenConnection(connection) | Abrir conexión |
+| N5 | 49 | ExecuteMySqlCommand(command) | Ejecutar |
 | N6 | 50 | return affectedRows | Devolver conteo |
 | N7 | 51 | Fin | Salida |
 
