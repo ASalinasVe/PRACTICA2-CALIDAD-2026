@@ -2161,6 +2161,17 @@ flowchart TD
 
 **Puntos de decisión:** if en línea 60; foreach en línea 63; if de categoría Unicode en línea 66.
 
+**Complejidad ciclomática y pruebas de PEB-48:** el grafo tiene 10 nodos (N = 10), 12 aristas (E = 12) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 12 - 10 + 2(1) = 4`. También tiene tres nodos predicado (D = 3), así que `D + 1 = 4`; ambas medidas coinciden. Los cuatro casos del comentario se implementan como cuatro pruebas individuales en `RegistrationRemoveDiacriticsTests`:
+
+| Caso | Entrada → resultado esperado | Prueba | Ramas ejercitadas |
+|---|---|---|---|
+| 1 | `" "` → `""` | `RemoveDiacritics_WithWhitespace_ReturnsEmptyString` | La guarda de texto en blanco retorna de inmediato. |
+| 2 | `"a"` → `"a"` | `RemoveDiacritics_WithUnaccentedCharacter_PreservesCharacter` | Continúa tras la guarda; conserva un carácter y termina el recorrido. |
+| 3 | `"á"` → `"a"` | `RemoveDiacritics_WithAccentedCharacter_RemovesDiacritic` | Conserva la letra base y omite la marca combinante producida por FormD. |
+| 4 | `"\u0301"` → `""` | `RemoveDiacritics_WithStandaloneCombiningMark_RemovesCharacter` | La entrada pasa la guarda, pero la marca no se agrega al resultado. |
+
+Las cuatro pruebas cubren las dos salidas de la guarda y las dos salidas de la condición de categoría Unicode. El recorrido del `foreach` ejecuta su cuerpo y luego sale en los casos no blancos. La arista de salida inmediata del `foreach` antes de cualquier iteración no tiene un caso realizable con una entrada no blanca que produzca una cadena normalizada vacía; por eso no se añade un quinto caso artificial. Cobertura Cobertura reporta 100 % de líneas y 100 % de ramas para `RemoveDiacritics`. Como la función es local, las pruebas invocan su método privado generado mediante reflexión y no cambian la API de producción.
+
 ### Función local Registration.RegisterUser.SlugifyLetters
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Repository/Registration.cs  
