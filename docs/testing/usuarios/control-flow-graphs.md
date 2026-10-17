@@ -1962,6 +1962,8 @@ flowchart TD
 
 **Puntos de decisión:** condición del for en línea 46. La asignación del buffer en línea 43 puede fallar para un length no válido; el método no tiene catch local.
 
+**Complejidad ciclomática y caminos independientes:** el grafo tiene 6 nodos (N = 6), 6 aristas (E = 6) y un componente conectado (P = 1). Por aristas y nodos, `V(G) = E - N + 2P = 6 - 6 + 2(1) = 2`. Tiene dos regiones (R = 2) y un nodo predicado (D = 1), por lo que `D + 1 = 2`. Los tres métodos coinciden: `V(G) = 2`; los caminos independientes son cero iteraciones (`N1 → N2 → N3 → N5 → N6`) y una iteración antes de salir (`N1 → N2 → N3 → N4 → N3 → N5 → N6`). Los cubren `RegistrationGeneratePasswordTests.GeneratePassword_WithZeroLength_ReturnsEmptyString` y `RegistrationGeneratePasswordTests.GeneratePassword_WithLengthOne_ReturnsCharacterFromAllowedAlphabet`, respectivamente. La segunda prueba comprueba longitud y pertenencia al alfabeto, sin depender del carácter aleatorio generado.
+
 
 ### Registration.RegisterUser
 
