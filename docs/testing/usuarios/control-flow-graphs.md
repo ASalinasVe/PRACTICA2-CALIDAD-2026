@@ -2343,6 +2343,8 @@ flowchart TD
 
 **Puntos de decisión:** ninguno. ExecuteCommand no se expande.
 
+**Complejidad ciclomática y caminos independientes:** el grafo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1). Por aristas y nodos, `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`. El grafo tiene una región (R = 1) y cero nodos predicado (D = 0), por lo que `D + 1 = 1`. Los tres métodos coinciden: `V(G) = 1`; existe un camino independiente, `N1 → N2 → N3 → N4`, cubierto por `MySqlConnectionManagerExecuteQueryTests.ExecuteQuery_WithValidQuery_ReturnsMappedRows`. El cálculo `2 - 3 + 2 = 1` anotado en el comentario del ticket no corresponde a los nodos y aristas de este grafo; se corrige aquí con los conteos reales.
+
 
 ### MySqlConnectionManager.ExecuteParameterizedNonQuery&lt;T&gt;
 
