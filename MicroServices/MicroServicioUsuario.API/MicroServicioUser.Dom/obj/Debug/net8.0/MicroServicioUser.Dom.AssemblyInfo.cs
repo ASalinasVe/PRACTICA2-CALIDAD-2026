@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MicroServicioUser.Dom")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aed1bd216afa67d1effc7ef49c7e49dee602a830")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90d784afb4baf7cfed142ad9a973a5b95b8fc7be")]
 [assembly: System.Reflection.AssemblyProductAttribute("MicroServicioUser.Dom")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MicroServicioUser.Dom")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

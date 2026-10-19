@@ -330,7 +330,7 @@ var assemblies = [
       { "name": "MicroServicoUser.Inf.Repository.Login", "rp": "MicroServicoUser.Inf_Login.html", "cl": 18, "ucl": 42, "cal": 60, "tl": 97, "cb": 10, "tb": 34, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.Registration", "rp": "MicroServicoUser.Inf_Registration.html", "cl": 77, "ucl": 0, "cal": 77, "tl": 132, "cb": 37, "tb": 42, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.RegistrationHelpers", "rp": "MicroServicoUser.Inf_RegistrationHelpers.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 132, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicoUser.Inf.Repository.UserRepository", "rp": "MicroServicoUser.Inf_UserRepository.html", "cl": 139, "ucl": 8, "cal": 147, "tl": 243, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.Repository.UserRepository", "rp": "MicroServicoUser.Inf_UserRepository.html", "cl": 147, "ucl": 0, "cal": 147, "tl": 243, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
