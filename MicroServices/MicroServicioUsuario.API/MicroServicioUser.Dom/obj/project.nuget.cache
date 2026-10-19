@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "cR+aFSqsOxM=",
+  "dgSpecHash": "h56VDZClTCY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\usser\\Desktop\\Uni\\GesCALIDADSistemas\\PRACTICA2-CALIDAD-2026\\MicroServices\\MicroServicioUsuario.API\\MicroServicioUser.Dom\\MicroServicioUser.Dom.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Camila 2026\\Gestión de Calidad de Sistemas\\PRACTICA2-CALIDAD-2026\\MicroServices\\MicroServicioUsuario.API\\MicroServicioUser.Dom\\MicroServicioUser.Dom.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Camila Carvajal\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.32\\microsoft.netcore.app.ref.8.0.32.nupkg.sha512",
+    "C:\\Users\\Camila Carvajal\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.32\\microsoft.windowsdesktop.app.ref.8.0.32.nupkg.sha512",
+    "C:\\Users\\Camila Carvajal\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.32\\microsoft.aspnetcore.app.ref.8.0.32.nupkg.sha512"
+  ],
   "logs": []
 }

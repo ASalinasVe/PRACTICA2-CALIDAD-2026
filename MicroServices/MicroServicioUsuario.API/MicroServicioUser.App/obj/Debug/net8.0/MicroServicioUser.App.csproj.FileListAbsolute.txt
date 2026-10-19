@@ -16,3 +16,21 @@ C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServic
 C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\refint\MicroServicioUser.App.dll
 C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.pdb
 C:\Users\usser\Desktop\Uni\GesCALIDADSistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\ref\MicroServicioUser.App.dll
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\bin\Debug\net8.0\MicroServicioUser.App.deps.json
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\bin\Debug\net8.0\MicroServicioUser.App.dll
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\bin\Debug\net8.0\MicroServicioUser.App.pdb
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\bin\Debug\net8.0\MicroServicioUser.Dom.dll
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\bin\Debug\net8.0\MicroServicoUser.Inf.dll
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\bin\Debug\net8.0\MicroServicioUser.Dom.pdb
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\bin\Debug\net8.0\MicroServicoUser.Inf.pdb
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.csproj.AssemblyReference.cache
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.AssemblyInfoInputs.cache
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.AssemblyInfo.cs
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.csproj.CoreCompileInputs.cache
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.sourcelink.json
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroSer.CBC5404E.Up2Date
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.dll
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\refint\MicroServicioUser.App.dll
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\MicroServicioUser.App.pdb
+C:\Camila 2026\Gestión de Calidad de Sistemas\PRACTICA2-CALIDAD-2026\MicroServices\MicroServicioUsuario.API\MicroServicioUser.App\obj\Debug\net8.0\ref\MicroServicioUser.App.dll
