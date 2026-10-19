@@ -301,7 +301,7 @@ var assemblies = [
     "classes": [
       { "name": "MicroServicioUser.Dom.Dto.LoginResponse", "rp": "MicroServicioUser.Dom_LoginResponse.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.Dom.Entities.User", "rp": "MicroServicioUser.Dom_User.html", "cl": 14, "ucl": 0, "cal": 14, "tl": 49, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUser.Dom.Patterns.Result", "rp": "MicroServicioUser.Dom_Result.html", "cl": 9, "ucl": 1, "cal": 10, "tl": 31, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.Dom.Patterns.Result", "rp": "MicroServicioUser.Dom_Result.html", "cl": 10, "ucl": 0, "cal": 10, "tl": 31, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.Dom.Patterns.Result\u003CT\u003E", "rp": "MicroServicioUser.Dom_Result_1.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.Dom.Rules.PasswordValidator", "rp": "MicroServicioUser.Dom_PasswordValidator.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 22, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},

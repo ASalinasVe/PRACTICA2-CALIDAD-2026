@@ -1136,6 +1136,18 @@ flowchart TD
 
 **Puntos de decisión:** ninguno.
 
+**Complejidad ciclomática y pruebas del ticket de Result.Success():** el grafo tiene 3 nodos (N = 3), 2 aristas (E = 2) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 2 - 3 + 2(1) = 1`. Tiene 1 región (R = 1) y 0 nodos predicado (D = 0), así que `D + 1 = 1`; los tres métodos coinciden. No hay decisiones, retornos anticipados, bucles ni `try`. El único camino independiente es N1 → N2 → N3.
+
+El total de pruebas es 3. La prueba 1 cubre el camino único; las pruebas 2 y 3 verifican postcondiciones adicionales de la misma expresión (cada llamada crea una instancia nueva y no comparte la lista de errores). No se añadieron caminos porque el método no tiene ramas.
+
+| Caso | Preparación → resultado esperado | Prueba | Propósito |
+|---|---|---|---|
+| 1 | `Result.Success()` → `IsSuccess` true, `IsFailure` false, `Errors` vacío | `Success_ReturnsSuccessWithNoErrors` | Camino único |
+| 2 | Dos llamadas → instancias distintas | `Success_ReturnsNewInstanceOnEachCall` | Nueva instancia por llamada |
+| 3 | Dos resultados → listas de errores distintas | `Success_DoesNotShareErrorListBetweenResults` | Lista propia por resultado |
+
+Las pruebas están en `MicroServicioUsuario.Tests/ResultSuccessFactoryTests.cs`.
+
 ### Result.Failure
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicioUser.Dom/Patterns/Result.cs  
