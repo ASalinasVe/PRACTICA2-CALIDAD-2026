@@ -292,7 +292,7 @@ var assemblies = [
     "classes": [
       { "name": "MicroServicioUser.App.Services.EmailService", "rp": "MicroServicioUser.App_EmailService.html", "cl": 69, "ucl": 0, "cal": 69, "tl": 90, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.App.Services.JwtService", "rp": "MicroServicioUser.App_JwtService.html", "cl": 21, "ucl": 0, "cal": 21, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUser.App.Services.LoginService", "rp": "MicroServicioUser.App_LoginService.html", "cl": 10, "ucl": 3, "cal": 13, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.App.Services.LoginService", "rp": "MicroServicioUser.App_LoginService.html", "cl": 13, "ucl": 0, "cal": 13, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.App.Services.RegistrationService", "rp": "MicroServicioUser.App_RegistrationService.html", "cl": 23, "ucl": 0, "cal": 23, "tl": 46, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.App.Services.UserService", "rp": "MicroServicioUser.App_UserService.html", "cl": 27, "ucl": 0, "cal": 27, "tl": 58, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
