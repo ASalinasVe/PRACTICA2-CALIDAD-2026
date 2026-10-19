@@ -311,7 +311,7 @@ var assemblies = [
       { "name": "MicroServicioUsuario.API.Controllers.ChangePasswordDTO", "rp": "MicroServicioUsuario.API_ChangePasswordDTO.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUsuario.API.Controllers.LoginDTO", "rp": "MicroServicioUsuario.API_LoginDTO.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUsuario.API.Controllers.RegisterDTO", "rp": "MicroServicioUsuario.API_RegisterDTO.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUsuario.API.Controllers.UserController", "rp": "MicroServicioUsuario.API_UserController.html", "cl": 105, "ucl": 30, "cal": 135, "tl": 252, "cb": 14, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUsuario.API.Controllers.UserController", "rp": "MicroServicioUsuario.API_UserController.html", "cl": 131, "ucl": 4, "cal": 135, "tl": 252, "cb": 18, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUsuario.Controllers.WeatherForecastController", "rp": "MicroServicioUsuario.API_WeatherForecastController.html", "cl": 0, "ucl": 17, "cal": 17, "tl": 33, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUsuario.WeatherForecast", "rp": "MicroServicioUsuario.API_WeatherForecast.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Program", "rp": "MicroServicioUsuario.API_Program.html", "cl": 0, "ucl": 77, "cal": 77, "tl": 112, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -355,12 +355,6 @@ var riskHotspots = [
     "metrics": [
       { "value": 156, "exceeded": true },
       { "value": 12, "exceeded": false },
-    ]},
-  {
-    "assembly": "MicroServicioUsuario.API", "class": "MicroServicioUsuario.API.Controllers.UserController", "reportPath": "MicroServicioUsuario.API_UserController.html", "methodName": "Update()", "methodShortName": "Update()", "fileIndex": 0, "line": 181,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
     ]},
   {
     "assembly": "MicroServicioUsuario.API", "class": "Program", "reportPath": "MicroServicioUsuario.API_Program.html", "methodName": "\u003CMain\u003E$(System.String[])", "methodShortName": "\u003CMain\u003E$(...)", "fileIndex": 0, "line": 12,
