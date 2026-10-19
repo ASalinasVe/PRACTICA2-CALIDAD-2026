@@ -1223,6 +1223,20 @@ flowchart TD
 
 **Puntos de decisión:** ninguno.
 
+**Complejidad ciclomática y pruebas del ticket de Result<T>.Failure:** el grafo tiene 3 nodos (N = 3), 2 aristas (E = 2) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 2 - 3 + 2(1) = 1`. Tiene 1 región (R = 1) y 0 nodos predicado (D = 0), así que `D + 1 = 1`; los tres métodos coinciden. No hay decisiones, retornos anticipados, bucles ni `try`. El único camino independiente es N1 → N2 → N3.
+
+El total de pruebas es 5. La prueba 1 cubre el camino único; las pruebas 2 a 5 verifican postcondiciones adicionales de la misma expresión (orden de errores, lista vacía, `default(T)` para tipo valor y copia del arreglo de entrada). No se añadieron caminos porque el método no tiene ramas.
+
+| Caso | Preparación → resultado esperado | Prueba | Propósito |
+|---|---|---|---|
+| 1 | Un error → `Failure` con ese error y `Value` nulo | `Failure_WithOneError_ReturnsFailureWithThatErrorAndDefaultValue` | Camino único |
+| 2 | Varios errores → mismos errores en orden | `Failure_WithMultipleErrors_ReturnsThemInOrder` | Orden de errores |
+| 3 | Sin errores → lista vacía | `Failure_WithNoErrors_ReturnsEmptyErrorList` | Parámetro `params` vacío |
+| 4 | `T` tipo valor → `Value == 0` | `Failure_WithValueType_ReturnsDefaultValueOfT` | `default(T)` |
+| 5 | Modificar el arreglo de entrada no altera `Errors` | `Failure_CopiesErrorsFromInputArray` | Copia en `new List<string>(errors)` |
+
+Las pruebas están en `MicroServicioUsuario.Tests/ResultGenericFailureFactoryTests.cs`. No se probó `Failure((string[])null)`, porque la excepción `ArgumentNullException` proviene de la BCL y no es una rama del método.
+
 
 # Proyecto Inf — MicroServicoUser.Inf
 
