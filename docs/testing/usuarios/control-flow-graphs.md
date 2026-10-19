@@ -8,7 +8,7 @@ Se analizaron los cuerpos de métodos escritos en los proyectos API, App, Dom e 
 
 Se excluyeron archivos generados, carpetas bin/ y obj/, el proyecto de pruebas, interfaces sin implementación, propiedades/accesores automáticos y declaraciones sin cuerpo. Las dos propiedades calculadas con cuerpo explícito se incluyen en un apéndice separado y no se suman al conteo de métodos. Las llamadas a otros métodos o bibliotecas se representan como bloques; no se expanden. Las expresiones SQL dentro de literales se tratan como datos, no como decisiones del flujo C#.
 
-Cada grafo es de flujo normal salvo las aristas de excepción indicadas explícitamente. Los catch se conectan desde el bloque try que los contiene. Las excepciones que una llamada externa pudiera lanzar fuera de un try/catch no se predicen: su condición depende del runtime/proveedor. Las etiquetas “Sí/No” se refieren a la condición del nodo indicado. No se calcula V(G).
+Cada grafo es de flujo normal salvo las aristas de excepción indicadas explícitamente. Los catch se conectan desde el bloque try que los contiene. Las excepciones que una llamada externa pudiera lanzar fuera de un try/catch no se predicen: su condición depende del runtime/proveedor. Las etiquetas “Sí/No” se refieren a la condición del nodo indicado. V(G) no se calcula en general; cuando un ticket requiere el análisis, sus valores se documentan en la sección del método correspondiente.
 
 ## Índice de métodos
 
@@ -81,7 +81,10 @@ Cada grafo es de flujo normal salvo las aristas de excepción indicadas explíci
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteParameterizedNonQuery&lt;T&gt;(string, T) | 32–36 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteNonQuery(string) | 38–42 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteCommand(MySqlCommand) | 44–51 |
-| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteCommand&lt;T&gt;(MySqlCommand) | 52–65 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteCommand&lt;T&gt;(MySqlCommand) | 52–58 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.LoadDataTable(MySqlCommand) | 60–72 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.OpenConnection(MySqlConnection) | 74 |
+| MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs | MySqlConnectionManager.ExecuteMySqlCommand(MySqlCommand) | 76 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/DbParameterHelper.cs | DbParameterHelper.PopulateCommandParameters&lt;T&gt;(string, T) | 10–41 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/DbMapper.cs | DbMapper.MapDataRowToModel&lt;T&gt;(DataRow) | 10–38 |
 | MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/DbMapper.cs | DbMapper.MapDataTableToModelIterable&lt;T&gt;(DataTable) | 40–49 |
@@ -1323,6 +1326,15 @@ flowchart TD
 
 **Puntos de decisión:** catch(Exception), línea 87.
 
+**Complejidad ciclomática y pruebas de PEB-36:** el grafo tiene 7 nodos (N = 7), 7 aristas (E = 7) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 7 - 7 + 2(1) = 2`. También tiene dos regiones (R = 2) y un nodo predicado (D = 1), así que `D + 1 = 2`; los tres métodos coinciden. Los dos caminos independientes son la inserción normal y la excepción capturada. Los dos casos del comentario están implementados en `UserRepositoryInsertTests`:
+
+| Caso | Preparación → resultado esperado | Prueba | Camino ejercitado |
+|---|---|---|---|
+| 1 | Usuario válido e `INSERT` exitoso con 1 fila afectada → `Success`, valor `1` | `Insert_WhenDatabaseInsertsUser_ReturnsSuccessAndAffectedRows` | Ejecución normal y retorno exitoso. |
+| 2 | El `INSERT` lanza `Error de conexión` → `Failure` con ese mensaje | `Insert_WhenDatabaseThrows_ReturnsFailureWithExceptionMessage` | Excepción capturada y retorno de fallo. |
+
+Las pruebas usan un `IMySqlConnectionManager` falso para controlar el resultado del `INSERT` y provocar la excepción, sin conectarse a MySQL.
+
 ### UserRepository.Update
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Repository/UserRepository.cs  
@@ -1370,6 +1382,15 @@ flowchart TD
 | N6 → N7 | return | 113 |
 
 **Puntos de decisión:** catch(Exception), línea 111.
+
+**Complejidad ciclomática y pruebas de PEB-37:** el grafo tiene 7 nodos (N = 7), 7 aristas (E = 7) y un componente conectado (P = 1), así que `V(G) = E - N + 2P = 7 - 7 + 2(1) = 2`. Tiene dos regiones (R = 2) y un nodo predicado (D = 1), por lo que `D + 1 = 2`; los tres cálculos coinciden. Los dos caminos independientes son la actualización normal y la excepción capturada. Los dos casos del comentario se implementan en `UserRepositoryUpdateTests`:
+
+| Caso | Preparación → resultado esperado | Prueba | Camino ejercitado |
+|---|---|---|---|
+| 1 | Usuario y actualización exitosa con 1 fila afectada → `Success`, valor `1` | `Update_WhenDatabaseUpdatesUser_ReturnsSuccessAndAffectedRows` | Ejecución normal y retorno exitoso. |
+| 2 | La actualización lanza `Error de conexión` → `Failure` con ese mensaje | `Update_WhenDatabaseThrows_ReturnsFailureWithExceptionMessage` | Excepción capturada y retorno de fallo. |
+
+Las pruebas usan un `IMySqlConnectionManager` falso para controlar el resultado de la actualización y provocar la excepción, sin conectarse a MySQL.
 
 
 ### UserRepository.Search
@@ -1914,6 +1935,15 @@ flowchart TD
 
 **Puntos de decisión:** foreach en línea 21.
 
+**Complejidad ciclomática y pruebas de PEB-45:** el grafo tiene 6 nodos (N = 6), 6 aristas (E = 6) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 6 - 6 + 2(1) = 2`. También hay dos regiones (R = 2) y un nodo predicado (D = 1), así que `D + 1 = 2`; los tres métodos coinciden. La base teórica contempla el camino sin iteraciones y el camino con iteraciones. En este método, `ComputeHash` siempre produce 16 bytes, por lo que el camino de cero iteraciones no es alcanzable con una entrada válida y solo hay un camino factible. El ticket pide dos entradas para verificar dos resultados conocidos, implementadas como dos pruebas individuales en `RegistrationHelpersMd5HexTests`:
+
+| Caso | Entrada → resultado esperado | Prueba | Cobertura ejercitada |
+|---|---|---|---|
+| 1 | `""` → `d41d8cd98f00b204e9800998ecf8427e` | `Md5Hex_WithEmptyInput_ReturnsKnownMd5Digest` | Calcula y formatea los 16 bytes del hash de una cadena vacía. |
+| 2 | `"abc"` → `900150983cd24fb0d6963f7d28e17f72` | `Md5Hex_WithAbcInput_ReturnsKnownMd5Digest` | Calcula y formatea los 16 bytes del hash de texto UTF-8. |
+
+Los dos casos cubren la iteración y la salida del `foreach`; ambos ejercitan el mismo camino factible, pero validan resultados diferentes. No se agrega un tercer caso artificial para intentar producir un hash vacío.
+
 ### Registration.GeneratePassword
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Repository/Registration.cs  
@@ -1958,6 +1988,8 @@ flowchart TD
 | N5 → N6 | return | 50 |
 
 **Puntos de decisión:** condición del for en línea 46. La asignación del buffer en línea 43 puede fallar para un length no válido; el método no tiene catch local.
+
+**Complejidad ciclomática y caminos independientes:** el grafo tiene 6 nodos (N = 6), 6 aristas (E = 6) y un componente conectado (P = 1). Por aristas y nodos, `V(G) = E - N + 2P = 6 - 6 + 2(1) = 2`. Tiene dos regiones (R = 2) y un nodo predicado (D = 1), por lo que `D + 1 = 2`. Los tres métodos coinciden: `V(G) = 2`; los caminos independientes son cero iteraciones (`N1 → N2 → N3 → N5 → N6`) y una iteración antes de salir (`N1 → N2 → N3 → N4 → N3 → N5 → N6`). Los cubren `RegistrationGeneratePasswordTests.GeneratePassword_WithZeroLength_ReturnsEmptyString` y `RegistrationGeneratePasswordTests.GeneratePassword_WithLengthOne_ReturnsCharacterFromAllowedAlphabet`, respectivamente. La segunda prueba comprueba longitud y pertenencia al alfabeto, sin depender del carácter aleatorio generado.
 
 
 ### Registration.RegisterUser
@@ -2093,6 +2125,25 @@ flowchart TD
 
 **Puntos de decisión:** condición OR de tres operandos en línea 55 (cada operando se evalúa solo si los anteriores son falsos); condición AND en línea 86 (segundo operando solo si el primero es verdadero); if en línea 94; while en línea 99; operador condicional ?: en línea 108; if de inserción y retorno temprano en líneas 126–127. firstName/lastName/email fueron validados en línea 55 antes de las expresiones ?. / ?? de líneas 82–83 y 92; por el flujo normal, sus fallback por null no son alcanzables.
 
+**Complejidad ciclomática y pruebas de PEB-47:** este grafo aislado tiene 25 nodos (N = 25), 33 aristas (E = 33) y un componente conectado (P = 1), así que `V(G) = E - N + 2P = 33 - 25 + 2(1) = 10`. Tiene 10 regiones (R = 10) y nueve nodos predicado (D = 9), por lo que `D + 1 = 10`; los tres métodos coinciden. El comentario del ticket usa N = 27 y E = 35, que también producen 10, pero esos conteos no corresponden a los nodos y aristas enumerados en este grafo. Las llamadas a métodos y los cuerpos de las funciones locales se analizan como unidades separadas, de acuerdo con el criterio del documento; una métrica que las expanda puede dar un valor distinto, pero no cambia este V(G) de `RegisterUser`.
+
+Los 10 casos del comentario están implementados como 10 pruebas individuales en `RegistrationRegisterUserTests`:
+
+| Caso | Entrada/ruta → resultado esperado | Prueba |
+|---|---|---|
+| 1 | `firstName = ""` → fallo por datos obligatorios | `RegisterUser_WhenFirstNameIsMissing_ReturnsRequiredDataFailure` |
+| 2 | `lastName = ""` → fallo por datos obligatorios | `RegisterUser_WhenLastNameIsMissing_ReturnsRequiredDataFailure` |
+| 3 | `email = ""` → fallo por datos obligatorios | `RegisterUser_WhenEmailIsMissing_ReturnsRequiredDataFailure` |
+| 4 | Nombre sin letras ASCII; usa `ana` del email → éxito | `RegisterUser_WhenFirstNameHasNoAsciiLetters_UsesEmailUsername` |
+| 5 | Apellido sin letras ASCII; usa `maria` del email → éxito | `RegisterUser_WhenLastNameHasNoAsciiLetters_UsesEmailUsername` |
+| 6 | Nombre y apellido válidos, usuario libre y rol `Admin` → `a_lopez`, código `1` | `RegisterUser_WhenUsernameIsAvailableAndRoleIsKnown_InsertsUser` |
+| 7 | La parte local `123` del email no genera slug → usuario predeterminado `user` | `RegisterUser_WhenEmailLocalPartHasNoAsciiLetters_UsesDefaultUsername` |
+| 8 | `a_lopez` ocupado y `a_lopez2` libre → usa el sufijo `2` | `RegisterUser_WhenFirstUsernameIsTaken_UsesNextSuffix` |
+| 9 | Rol desconocido → inserta con código `0` | `RegisterUser_WhenRoleIsUnknown_UsesZeroRoleCode` |
+| 10 | Inserción devuelve `Failure("Error al crear usuario")` → `ok = false` con ese error | `RegisterUser_WhenInsertFails_ReturnsInsertError` |
+
+Las pruebas sustituyen `IRepository` para controlar las colisiones de username y el resultado de inserción. En los casos exitosos comprueban que la contraseña generada tenga 10 caracteres y que el usuario insertado guarde su hash, sin depender de un valor aleatorio exacto. La ejecución con Cobertura reportó 100 % de líneas y 82,14 % de ramas (23/28) en la máquina de estado generada para `RegisterUser`. Las cinco ramas restantes pertenecen a los fallback de null de `firstName?.Trim() ?? ""`, `lastName?.Trim() ?? ""` y `(email ?? "")`; no son alcanzables porque el guard de la línea 55 retorna antes si cualquiera de esos argumentos es null. Por tanto, el 28 observado en el XML corresponde al total de resultados de rama instrumentados, no al `V(G) = 10` del grafo aislado.
+
 
 ### Función local Registration.RegisterUser.RemoveDiacritics
 
@@ -2156,6 +2207,17 @@ flowchart TD
 
 **Puntos de decisión:** if en línea 60; foreach en línea 63; if de categoría Unicode en línea 66.
 
+**Complejidad ciclomática y pruebas de PEB-48:** el grafo tiene 10 nodos (N = 10), 12 aristas (E = 12) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 12 - 10 + 2(1) = 4`. También tiene tres nodos predicado (D = 3), así que `D + 1 = 4`; ambas medidas coinciden. Los cuatro casos del comentario se implementan como cuatro pruebas individuales en `RegistrationRemoveDiacriticsTests`:
+
+| Caso | Entrada → resultado esperado | Prueba | Ramas ejercitadas |
+|---|---|---|---|
+| 1 | `" "` → `""` | `RemoveDiacritics_WithWhitespace_ReturnsEmptyString` | La guarda de texto en blanco retorna de inmediato. |
+| 2 | `"a"` → `"a"` | `RemoveDiacritics_WithUnaccentedCharacter_PreservesCharacter` | Continúa tras la guarda; conserva un carácter y termina el recorrido. |
+| 3 | `"á"` → `"a"` | `RemoveDiacritics_WithAccentedCharacter_RemovesDiacritic` | Conserva la letra base y omite la marca combinante producida por FormD. |
+| 4 | `"\u0301"` → `""` | `RemoveDiacritics_WithStandaloneCombiningMark_RemovesCharacter` | La entrada pasa la guarda, pero la marca no se agrega al resultado. |
+
+Las cuatro pruebas cubren las dos salidas de la guarda y las dos salidas de la condición de categoría Unicode. El recorrido del `foreach` ejecuta su cuerpo y luego sale en los casos no blancos. La arista de salida inmediata del `foreach` antes de cualquier iteración no tiene un caso realizable con una entrada no blanca que produzca una cadena normalizada vacía; por eso no se añade un quinto caso artificial. Cobertura Cobertura reporta 100 % de líneas y 100 % de ramas para `RemoveDiacritics`. Como la función es local, las pruebas invocan su método privado generado mediante reflexión y no cambian la API de producción.
+
 ### Función local Registration.RegisterUser.SlugifyLetters
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Repository/Registration.cs  
@@ -2205,6 +2267,16 @@ flowchart TD
 | N7 → N8 | return | 79 |
 
 **Puntos de decisión:** foreach en línea 75 e if con el patrón relacional completo ch is >= 'a' and <= 'z' en línea 77.
+
+**Complejidad ciclomática y pruebas de PEB-49:** el grafo tiene 7 nodos (N = 7), 8 aristas (E = 8) y un componente conectado (P = 1): `V(G) = E - N + 2P = 8 - 7 + 2(1) = 3`. Tiene tres regiones (R = 3) y dos nodos predicado (D = 2), así que `D + 1 = 3`; los tres cálculos coinciden. Hay tres caminos independientes: cero iteraciones; una iteración que descarta un carácter; y una iteración que conserva un carácter. Los casos del comentario se implementan como tres pruebas individuales en `RegistrationSlugifyLettersTests`:
+
+| Caso | Entrada → resultado esperado | Prueba | Camino/ramas ejercitadas |
+|---|---|---|---|
+| 1 | `""` → `""` | `SlugifyLetters_WithEmptyText_ReturnsEmptyString` | El `foreach` no entra y retorna vacío. |
+| 2 | `"123!"` → `""` | `SlugifyLetters_WithNumbersAndSymbols_ReturnsEmptyString` | El `foreach` entra y descarta los caracteres fuera de `a-z`. |
+| 3 | `"ÁBC"` → `"abc"` | `SlugifyLetters_WithAccentedUppercaseText_ReturnsLowercaseAsciiLetters` | Quita el diacrítico, convierte a minúsculas y conserva las letras válidas. |
+
+`SlugifyLetters` es local a `RegisterUser`; las pruebas invocan su método privado generado mediante reflexión, sin cambiar la API de producción. En la ejecución con Cobertura, `SlugifyLetters` reportó 100 % de líneas y 100 % de ramas.
 
 
 ## Clase MySqlConnectionManager
@@ -2270,7 +2342,7 @@ flowchart TD
 | N2 → N3 | comando creado | 19 |
 | N3 → N4 | return | 19 |
 
-**Puntos de decisión:** ninguno. No se expanden PopulateCommandParameters ni ExecuteCommand.
+**Puntos de decisión:** ninguno en este cuerpo. El flujo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1): `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`; R = 1, D = 0 y D + 1 = 1. Hay un camino independiente, cubierto por `MySqlConnectionManagerExecuteParameterizedQueryTests.ExecuteParameterizedQuery_WithMatchingParameter_ReturnsMappedRow`. La prueba verifica la creación del parámetro `@Id`, el valor enviado y el mapeo de la fila de respuesta. No se expanden `PopulateCommandParameters` ni `ExecuteCommand` en este grafo.
 
 ### MySqlConnectionManager.ExecuteParameterizedQuery&lt;TOut,TParam&gt;
 
@@ -2304,7 +2376,7 @@ flowchart TD
 | N2 → N3 | comando creado | 24 |
 | N3 → N4 | return | 24 |
 
-**Puntos de decisión:** ninguno. No se expanden las llamadas.
+**Puntos de decisión:** ninguno en este cuerpo. El flujo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1): `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`; R = 1, D = 0 y D + 1 = 1. Hay un camino independiente, cubierto por `MySqlConnectionManagerExecuteParameterizedQueryWithSeparateTypesTests.ExecuteParameterizedQuery_WithSeparateParameterAndResultTypes_ReturnsMappedRow`. La prueba usa un modelo `TParam` distinto de `TOut`, comprueba el parámetro `@Id` y el mapeo del resultado. No se expanden las llamadas.
 
 ### MySqlConnectionManager.ExecuteQuery&lt;T&gt;
 
@@ -2340,6 +2412,8 @@ flowchart TD
 
 **Puntos de decisión:** ninguno. ExecuteCommand no se expande.
 
+**Complejidad ciclomática y caminos independientes:** el grafo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1). Por aristas y nodos, `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`. El grafo tiene una región (R = 1) y cero nodos predicado (D = 0), por lo que `D + 1 = 1`. Los tres métodos coinciden: `V(G) = 1`; existe un camino independiente, `N1 → N2 → N3 → N4`, cubierto por `MySqlConnectionManagerExecuteQueryTests.ExecuteQuery_WithValidQuery_ReturnsMappedRows`. El cálculo `2 - 3 + 2 = 1` anotado en el comentario del ticket no corresponde a los nodos y aristas de este grafo; se corrige aquí con los conteos reales.
+
 
 ### MySqlConnectionManager.ExecuteParameterizedNonQuery&lt;T&gt;
 
@@ -2373,7 +2447,7 @@ flowchart TD
 | N2 → N3 | comando listo | 35 |
 | N3 → N4 | return | 35 |
 
-**Puntos de decisión:** ninguno. No hay catch local; fallos de llamadas se propagan.
+**Puntos de decisión:** ninguno en este cuerpo. Hay 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1), así que `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`. El grafo tiene una región (R = 1), cero nodos predicado (D = 0) y `D + 1 = 1`; los tres métodos coinciden. El único camino independiente crea el comando parametrizado y devuelve las filas afectadas; lo cubre `MySqlConnectionManagerExecuteParameterizedNonQueryTests.ExecuteParameterizedNonQuery_WithExistingId_ReturnsAffectedRowCount`. No hay catch local; fallos de llamadas se propagan.
 
 ### MySqlConnectionManager.ExecuteNonQuery
 
@@ -2409,18 +2483,20 @@ flowchart TD
 
 **Puntos de decisión:** ninguno. No hay catch local.
 
+**Complejidad ciclomática y caminos independientes:** el grafo tiene 4 nodos (N = 4), 3 aristas (E = 3) y un componente conectado (P = 1). Por aristas y nodos, `V(G) = E - N + 2P = 3 - 4 + 2(1) = 1`. Tiene una región (R = 1) y cero nodos predicado (D = 0), por lo que `D + 1 = 1`. Los tres métodos coinciden: `V(G) = 1`; hay un camino independiente que crea el comando y devuelve el conteo delegado, cubierto por `MySqlConnectionManagerExecuteNonQueryTests.ExecuteNonQuery_WithUpdateQuery_ReturnsAffectedRowCount`. El comentario del ticket anotó `2 - 3 + 2 = 1`, pero esos conteos no corresponden al grafo; aquí se registran los valores reales. La prueba sustituye el ejecutor para no depender de un servidor MySQL.
+
 ### MySqlConnectionManager.ExecuteCommand(MySqlCommand)
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs  
-**Firma:** private int ExecuteCommand(MySqlCommand command)  
+**Firma:** protected virtual int ExecuteCommand(MySqlCommand command)
 **Líneas:** 44–51. Abre conexión, ejecuta ExecuteNonQuery y devuelve filas afectadas.
 
 ~~~csharp
-0044 | private int ExecuteCommand(MySqlCommand command)
+0044 | protected virtual int ExecuteCommand(MySqlCommand command)
 0046 | using MySqlConnection connection = CreateConnection();
 0047 | command.Connection = connection;
-0048 | connection.Open();
-0049 | int affectedRows = command.ExecuteNonQuery();
+0048 | OpenConnection(connection);
+0049 | int affectedRows = ExecuteMySqlCommand(command);
 0050 | return affectedRows;
 ~~~
 
@@ -2428,8 +2504,8 @@ flowchart TD
 flowchart TD
     N1([Entrada]) --> N2[Crear conexión]
     N2 --> N3[Asignar connection al command]
-    N3 --> N4[Open]
-    N4 --> N5[ExecuteNonQuery]
+    N3 --> N4[OpenConnection]
+    N4 --> N5[ExecuteMySqlCommand]
     N5 --> N6[return affectedRows]
     N6 --> N7([Salida])
 ~~~
@@ -2439,8 +2515,8 @@ flowchart TD
 | N1 | 44–45 | Entrada | Entrada |
 | N2 | 46 | CreateConnection() | Crear conexión |
 | N3 | 47 | command.Connection = connection | Asociar |
-| N4 | 48 | connection.Open() | Abrir |
-| N5 | 49 | ExecuteNonQuery() | Ejecutar |
+| N4 | 48 | OpenConnection(connection) | Abrir conexión |
+| N5 | 49 | ExecuteMySqlCommand(command) | Ejecutar |
 | N6 | 50 | return affectedRows | Devolver conteo |
 | N7 | 51 | Fin | Salida |
 
@@ -2453,59 +2529,149 @@ flowchart TD
 | N5 → N6 | ejecución completada | 50 |
 | N6 → N7 | return | 50 |
 
-**Puntos de decisión:** ninguno escrito. Open/ExecuteNonQuery pueden lanzar excepciones que no se capturan aquí; la ruta concreta depende del proveedor y el runtime.
+**Puntos de decisión:** ninguno en este cuerpo. Hay 7 nodos (N = 7), 6 aristas (E = 6) y un componente conectado (P = 1), por tanto `V(G) = E - N + 2P = 6 - 7 + 2(1) = 1`. El grafo tiene una región (R = 1), cero nodos predicado (D = 0) y `D + 1 = 1`; los tres métodos coinciden. El único camino independiente crea y asigna la conexión, la abre, ejecuta el comando y devuelve el conteo afectado. Lo cubre `MySqlConnectionManagerExecuteCommandNonQueryTests.ExecuteCommand_WithParameterizedUpdate_ReturnsAffectedRowCount`, que invoca este método a través de `ExecuteParameterizedNonQuery` y sustituye la apertura y la ejecución del driver para no requerir un servidor MySQL. Las excepciones del proveedor no se capturan en este cuerpo.
 
 ### MySqlConnectionManager.ExecuteCommand&lt;T&gt;
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs  
-**Firma:** private IEnumerable&lt;T&gt; ExecuteCommand&lt;T&gt;(MySqlCommand command) where T : new()  
-**Líneas:** 52–65. Ejecuta consulta en DataAdapter, carga DataTable y delega el mapeo.
+**Firma:** protected virtual IEnumerable&lt;T&gt; ExecuteCommand&lt;T&gt;(MySqlCommand command) where T : new()
+**Líneas:** 52–58. Obtiene el DataTable y mapea sus filas al tipo T.
 
 ~~~csharp
-0052 | private IEnumerable<T> ExecuteCommand<T>(MySqlCommand command) where T : new()
-0054 | using MySqlConnection connection = CreateConnection();
-0056 | command.Connection = connection;
-0057 | connection.Open();
-0059 | using MySqlDataAdapter adapter = new(command);
-0060 | DataTable dataTable = new();
-0061 | adapter.Fill(dataTable);
-0063 | IEnumerable<T> results = DbMapper.MapDataTableToModelIterable<T>(dataTable);
-0064 | return results;
+0052 | protected virtual IEnumerable<T> ExecuteCommand<T>(MySqlCommand command) where T : new()
+0054 | DataTable dataTable = LoadDataTable(command);
+0056 | IEnumerable<T> results = DbMapper.MapDataTableToModelIterable<T>(dataTable);
+0057 | return results;
 ~~~
 
 ~~~mermaid
 flowchart TD
-    N1([Entrada]) --> N2[Crear conexión]
-    N2 --> N3[Asociar conexión y Open]
-    N3 --> N4[Crear adapter y DataTable]
-    N4 --> N5[adapter.Fill]
-    N5 --> N6[DbMapper.MapDataTableToModelIterable]
-    N6 --> N7[return results]
-    N7 --> N8([Salida])
+    N1([Entrada]) --> N2[LoadDataTable]
+    N2 --> N3[DbMapper.MapDataTableToModelIterable]
+    N3 --> N4[return results]
+    N4 --> N5([Salida])
 ~~~
 
 | Nodo | Líneas | Fragmento o instrucción | Condición o acción |
 |---|---:|---|---|
 | N1 | 52–53 | Entrada | Entrada |
-| N2 | 54 | CreateConnection() | Crear conexión |
-| N3 | 56–57 | Asignar conexión; abrir | Preparar acceso |
-| N4 | 59–60 | Crear adapter y DataTable | Preparar lectura |
-| N5 | 61 | adapter.Fill(dataTable) | Cargar filas |
-| N6 | 63 | DbMapper.MapDataTableToModelIterable&lt;T&gt; | Mapear resultados |
-| N7 | 64 | return results | Devolver colección |
-| N8 | 65 | Fin | Salida |
+| N2 | 54 | LoadDataTable(command) | Obtener filas consultadas |
+| N3 | 56 | DbMapper.MapDataTableToModelIterable&lt;T&gt; | Mapear filas |
+| N4 | 57 | return results | Devolver colección |
+| N5 | 58 | Fin | Salida |
 
 | Origen → destino | Etiqueta | Línea |
 |---|---|---:|
 | N1 → N2 | secuencia | 54 |
-| N2 → N3 | conexión creada | 56 |
-| N3 → N4 | conexión abierta | 59 |
-| N4 → N5 | objetos creados | 61 |
-| N5 → N6 | Fill completado | 63 |
-| N6 → N7 | mapeo completado | 64 |
-| N7 → N8 | return | 64 |
+| N2 → N3 | tabla cargada | 56 |
+| N3 → N4 | mapeo completado | 57 |
+| N4 → N5 | return | 57 |
 
-**Puntos de decisión:** ninguno escrito. Las llamadas al proveedor/reflection pueden lanzar excepciones no capturadas; su condición concreta depende del runtime.
+**Puntos de decisión:** ninguno. El flujo lineal tiene 5 nodos (N = 5), 4 aristas (E = 4) y un componente conectado (P = 1). `V(G) = E - N + 2P = 4 - 5 + 2(1) = 1`; regiones R = 1; nodos predicado D = 0, por lo que D + 1 = 1. Los tres métodos coinciden. Hay un camino independiente que cubre la llamada de carga, el mapeo y el retorno; lo cubre `MySqlConnectionManagerExecuteCommandTests.ExecuteQuery_WithCompatibleDatabaseRow_ReturnsMappedModel` al invocar este método mediante `ExecuteQuery<T>`. El comentario del ticket anotó `2 - 3 + 2 = 1`, pero esos conteos no corresponden al grafo; aquí quedan registrados los conteos reales.
+
+### MySqlConnectionManager.LoadDataTable
+
+**Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs
+**Firma:** protected virtual DataTable LoadDataTable(MySqlCommand command)
+**Líneas:** 60–72. Ejecuta el comando con MySQL y devuelve la tabla cargada. Se deja virtual para sustituir solo el acceso externo cuando se prueba ExecuteCommand.
+
+~~~csharp
+0060 | protected virtual DataTable LoadDataTable(MySqlCommand command)
+0062 | using MySqlConnection connection = CreateConnection();
+0064–0065 | Asociar comando y abrir conexión
+0067–0068 | Crear MySqlDataAdapter y DataTable
+0069 | adapter.Fill(dataTable);
+0071 | return dataTable;
+~~~
+
+~~~mermaid
+flowchart TD
+    N1([Entrada]) --> N2[Crear conexión]
+    N2 --> N3[Asociar comando y abrir conexión]
+    N3 --> N4[Crear adapter y DataTable]
+    N4 --> N5[Fill]
+    N5 --> N6[return dataTable]
+    N6 --> N7([Salida])
+~~~
+
+| Nodo | Líneas | Fragmento o instrucción | Condición o acción |
+|---|---:|---|---|
+| N1 | 60–61 | Entrada | Entrada |
+| N2 | 62 | CreateConnection() | Crear conexión |
+| N3 | 64–65 | Asociar comando y abrir conexión | Preparar acceso |
+| N4 | 67–68 | Crear adapter y DataTable | Preparar lectura |
+| N5 | 69 | adapter.Fill(dataTable) | Cargar filas |
+| N6 | 71 | return dataTable | Devolver tabla |
+| N7 | 72 | Fin | Salida |
+
+| Origen → destino | Etiqueta | Línea |
+|---|---|---:|
+| N1 → N2 | secuencia | 62 |
+| N2 → N3 | conexión creada | 64 |
+| N3 → N4 | conexión abierta | 67 |
+| N4 → N5 | objetos creados | 69 |
+| N5 → N6 | Fill completado | 71 |
+| N6 → N7 | return | 71 |
+
+**Puntos de decisión:** ninguno escrito. Hay 7 nodos, 6 aristas y P = 1, por tanto `V(G) = 6 - 7 + 2 = 1`; R = 1 y D + 1 = 1.
+
+### MySqlConnectionManager.OpenConnection
+
+**Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs
+**Firma:** protected virtual void OpenConnection(MySqlConnection connection)
+**Línea:** 74. Delegación de la apertura al proveedor; se puede sustituir en pruebas unitarias.
+
+~~~csharp
+0074 | protected virtual void OpenConnection(MySqlConnection connection) => connection.Open();
+~~~
+
+~~~mermaid
+flowchart TD
+    N1([Entrada]) --> N2[connection.Open]
+    N2 --> N3([Salida])
+~~~
+
+| Nodo | Líneas | Fragmento o instrucción | Condición o acción |
+|---|---:|---|---|
+| N1 | 74 | Entrada | Entrada |
+| N2 | 74 | connection.Open() | Abrir conexión |
+| N3 | 74 | Fin | Salida |
+
+| Origen → destino | Etiqueta | Línea |
+|---|---|---:|
+| N1 → N2 | secuencia | 74 |
+| N2 → N3 | apertura completada | 74 |
+
+**Puntos de decisión:** ninguno. `V(G) = 2 - 3 + 2(1) = 1`; R = 1 y D + 1 = 1.
+
+### MySqlConnectionManager.ExecuteMySqlCommand
+
+**Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicoUser.Inf/Persistence/Database/MySqlConnectionManager.cs
+**Firma:** protected virtual int ExecuteMySqlCommand(MySqlCommand command)
+**Línea:** 76. Delegación de la ejecución al proveedor; se puede sustituir en pruebas unitarias.
+
+~~~csharp
+0076 | protected virtual int ExecuteMySqlCommand(MySqlCommand command) => command.ExecuteNonQuery();
+~~~
+
+~~~mermaid
+flowchart TD
+    N1([Entrada]) --> N2[command.ExecuteNonQuery]
+    N2 --> N3([Salida con filas afectadas])
+~~~
+
+| Nodo | Líneas | Fragmento o instrucción | Condición o acción |
+|---|---:|---|---|
+| N1 | 76 | Entrada | Entrada |
+| N2 | 76 | command.ExecuteNonQuery() | Ejecutar |
+| N3 | 76 | Resultado de la expresión | Devolver conteo |
+
+| Origen → destino | Etiqueta | Línea |
+|---|---|---:|
+| N1 → N2 | secuencia | 76 |
+| N2 → N3 | ejecución completada | 76 |
+
+**Puntos de decisión:** ninguno. `V(G) = 2 - 3 + 2(1) = 1`; R = 1 y D + 1 = 1.
 
 
 ## Clase DbParameterHelper

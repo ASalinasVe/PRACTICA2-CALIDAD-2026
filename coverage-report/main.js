@@ -290,28 +290,28 @@ var assemblies = [
   {
     "name": "MicroServicioUser.App",
     "classes": [
-      { "name": "MicroServicioUser.App.Services.EmailService", "rp": "MicroServicioUser.App_EmailService.html", "cl": 0, "ucl": 69, "cal": 69, "tl": 90, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUser.App.Services.JwtService", "rp": "MicroServicioUser.App_JwtService.html", "cl": 0, "ucl": 21, "cal": 21, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUser.App.Services.LoginService", "rp": "MicroServicioUser.App_LoginService.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.App.Services.EmailService", "rp": "MicroServicioUser.App_EmailService.html", "cl": 7, "ucl": 62, "cal": 69, "tl": 90, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.App.Services.JwtService", "rp": "MicroServicioUser.App_JwtService.html", "cl": 21, "ucl": 0, "cal": 21, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.App.Services.LoginService", "rp": "MicroServicioUser.App_LoginService.html", "cl": 10, "ucl": 3, "cal": 13, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.App.Services.RegistrationService", "rp": "MicroServicioUser.App_RegistrationService.html", "cl": 0, "ucl": 23, "cal": 23, "tl": 46, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUser.App.Services.UserService", "rp": "MicroServicioUser.App_UserService.html", "cl": 0, "ucl": 27, "cal": 27, "tl": 58, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.App.Services.UserService", "rp": "MicroServicioUser.App_UserService.html", "cl": 21, "ucl": 6, "cal": 27, "tl": 58, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "MicroServicioUser.Dom",
     "classes": [
-      { "name": "MicroServicioUser.Dom.Dto.LoginResponse", "rp": "MicroServicioUser.Dom_LoginResponse.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUser.Dom.Entities.User", "rp": "MicroServicioUser.Dom_User.html", "cl": 11, "ucl": 3, "cal": 14, "tl": 49, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUser.Dom.Patterns.Result", "rp": "MicroServicioUser.Dom_Result.html", "cl": 8, "ucl": 2, "cal": 10, "tl": 31, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.Dom.Dto.LoginResponse", "rp": "MicroServicioUser.Dom_LoginResponse.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.Dom.Entities.User", "rp": "MicroServicioUser.Dom_User.html", "cl": 14, "ucl": 0, "cal": 14, "tl": 49, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUser.Dom.Patterns.Result", "rp": "MicroServicioUser.Dom_Result.html", "cl": 9, "ucl": 1, "cal": 10, "tl": 31, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.Dom.Patterns.Result\u003CT\u003E", "rp": "MicroServicioUser.Dom_Result_1.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUser.Dom.Rules.PasswordValidator", "rp": "MicroServicioUser.Dom_PasswordValidator.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 22, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "MicroServicioUsuario.API",
     "classes": [
-      { "name": "MicroServicioUsuario.API.Controllers.ChangePasswordDTO", "rp": "MicroServicioUsuario.API_ChangePasswordDTO.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUsuario.API.Controllers.LoginDTO", "rp": "MicroServicioUsuario.API_LoginDTO.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUsuario.API.Controllers.ChangePasswordDTO", "rp": "MicroServicioUsuario.API_ChangePasswordDTO.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUsuario.API.Controllers.LoginDTO", "rp": "MicroServicioUsuario.API_LoginDTO.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUsuario.API.Controllers.RegisterDTO", "rp": "MicroServicioUsuario.API_RegisterDTO.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 252, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicioUsuario.API.Controllers.UserController", "rp": "MicroServicioUsuario.API_UserController.html", "cl": 0, "ucl": 135, "cal": 135, "tl": 252, "cb": 0, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicioUsuario.API.Controllers.UserController", "rp": "MicroServicioUsuario.API_UserController.html", "cl": 69, "ucl": 66, "cal": 135, "tl": 252, "cb": 8, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUsuario.Controllers.WeatherForecastController", "rp": "MicroServicioUsuario.API_WeatherForecastController.html", "cl": 0, "ucl": 17, "cal": 17, "tl": 33, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicioUsuario.WeatherForecast", "rp": "MicroServicioUsuario.API_WeatherForecast.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Program", "rp": "MicroServicioUsuario.API_Program.html", "cl": 0, "ucl": 77, "cal": 77, "tl": 112, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -322,15 +322,15 @@ var assemblies = [
       { "name": "MicroServicoUser.Inf.EmailAdapters.SmtpEmailAdapter", "rp": "MicroServicoUser.Inf_SmtpEmailAdapter.html", "cl": 0, "ucl": 30, "cal": 30, "tl": 56, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.EmailAdapters.SmtpSettings", "rp": "MicroServicoUser.Inf_SmtpSettings.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Persistence.Database.DbMapper", "rp": "MicroServicoUser.Inf_DbMapper.html", "cl": 26, "ucl": 9, "cal": 35, "tl": 50, "cb": 9, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicoUser.Inf.Persistence.Database.DbParameterHelper", "rp": "MicroServicoUser.Inf_DbParameterHelper.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 42, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicoUser.Inf.Persistence.Database.MySqlConnectionManager", "rp": "MicroServicoUser.Inf_MySqlConnectionManager.html", "cl": 5, "ucl": 37, "cal": 42, "tl": 66, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.Persistence.Database.DbParameterHelper", "rp": "MicroServicoUser.Inf_DbParameterHelper.html", "cl": 24, "ucl": 0, "cal": 24, "tl": 42, "cb": 10, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.Persistence.Database.MySqlConnectionManager", "rp": "MicroServicoUser.Inf_MySqlConnectionManager.html", "cl": 37, "ucl": 11, "cal": 48, "tl": 77, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Persistence.MySqlConnectionDB", "rp": "MicroServicoUser.Inf_MySqlConnectionDB.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 25, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.AuthenticationRoles", "rp": "MicroServicoUser.Inf_AuthenticationRoles.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.IdDto", "rp": "MicroServicoUser.Inf_IdDto.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 243, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.Login", "rp": "MicroServicoUser.Inf_Login.html", "cl": 18, "ucl": 42, "cal": 60, "tl": 97, "cb": 10, "tb": 34, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicoUser.Inf.Repository.Registration", "rp": "MicroServicoUser.Inf_Registration.html", "cl": 0, "ucl": 77, "cal": 77, "tl": 132, "cb": 0, "tb": 42, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.Repository.Registration", "rp": "MicroServicoUser.Inf_Registration.html", "cl": 77, "ucl": 0, "cal": 77, "tl": 132, "cb": 37, "tb": 42, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.RegistrationHelpers", "rp": "MicroServicoUser.Inf_RegistrationHelpers.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 132, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicoUser.Inf.Repository.UserRepository", "rp": "MicroServicoUser.Inf_UserRepository.html", "cl": 57, "ucl": 90, "cal": 147, "tl": 243, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.Repository.UserRepository", "rp": "MicroServicoUser.Inf_UserRepository.html", "cl": 113, "ucl": 34, "cal": 147, "tl": 243, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -345,12 +345,6 @@ var riskHotspotMetrics = [
 
 var riskHotspots = [
   {
-    "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Repository.Registration", "reportPath": "MicroServicoUser.Inf_Registration.html", "methodName": "RegisterUser()", "methodShortName": "RegisterUser()", "fileIndex": 0, "line": 54,
-    "metrics": [
-      { "value": 812, "exceeded": true },
-      { "value": 28, "exceeded": true },
-    ]},
-  {
     "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Repository.Login", "reportPath": "MicroServicoUser.Inf_Login.html", "methodName": "ChangePassword()", "methodShortName": "ChangePassword()", "fileIndex": 0, "line": 15,
     "metrics": [
       { "value": 156, "exceeded": true },
@@ -361,12 +355,6 @@ var riskHotspots = [
     "metrics": [
       { "value": 156, "exceeded": true },
       { "value": 12, "exceeded": false },
-    ]},
-  {
-    "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Persistence.Database.DbParameterHelper", "reportPath": "MicroServicoUser.Inf_DbParameterHelper.html", "methodName": "PopulateCommandParameters(System.String,T)", "methodShortName": "PopulateCommandParameters(...)", "fileIndex": 0, "line": 11,
-    "metrics": [
-      { "value": 110, "exceeded": true },
-      { "value": 10, "exceeded": false },
     ]},
   {
     "assembly": "MicroServicioUsuario.API", "class": "MicroServicioUsuario.API.Controllers.UserController", "reportPath": "MicroServicioUsuario.API_UserController.html", "methodName": "Update()", "methodShortName": "Update()", "fileIndex": 0, "line": 181,
@@ -387,16 +375,10 @@ var riskHotspots = [
       { "value": 6, "exceeded": false },
     ]},
   {
-    "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Repository.Registration", "reportPath": "MicroServicoUser.Inf_Registration.html", "methodName": "RemoveDiacritics()", "methodShortName": "RemoveDiacritics()", "fileIndex": 0, "line": 59,
+    "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Repository.Registration", "reportPath": "MicroServicoUser.Inf_Registration.html", "methodName": "RegisterUser()", "methodShortName": "RegisterUser()", "fileIndex": 0, "line": 54,
     "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Repository.Registration", "reportPath": "MicroServicoUser.Inf_Registration.html", "methodName": "SlugifyLetters()", "methodShortName": "SlugifyLetters()", "fileIndex": 0, "line": 72,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
+      { "value": 28, "exceeded": false },
+      { "value": 28, "exceeded": true },
     ]},
 ];
 
