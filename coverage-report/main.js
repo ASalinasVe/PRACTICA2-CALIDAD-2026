@@ -319,8 +319,8 @@ var assemblies = [
   {
     "name": "MicroServicoUser.Inf",
     "classes": [
-      { "name": "MicroServicoUser.Inf.EmailAdapters.SmtpEmailAdapter", "rp": "MicroServicoUser.Inf_SmtpEmailAdapter.html", "cl": 0, "ucl": 30, "cal": 30, "tl": 56, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicoUser.Inf.EmailAdapters.SmtpSettings", "rp": "MicroServicoUser.Inf_SmtpSettings.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.EmailAdapters.SmtpEmailAdapter", "rp": "MicroServicoUser.Inf_SmtpEmailAdapter.html", "cl": 29, "ucl": 1, "cal": 30, "tl": 56, "cb": 6, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.EmailAdapters.SmtpSettings", "rp": "MicroServicoUser.Inf_SmtpSettings.html", "cl": 6, "ucl": 1, "cal": 7, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Persistence.Database.DbMapper", "rp": "MicroServicoUser.Inf_DbMapper.html", "cl": 26, "ucl": 9, "cal": 35, "tl": 50, "cb": 9, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Persistence.Database.DbParameterHelper", "rp": "MicroServicoUser.Inf_DbParameterHelper.html", "cl": 24, "ucl": 0, "cal": 24, "tl": 42, "cb": 10, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Persistence.Database.MySqlConnectionManager", "rp": "MicroServicoUser.Inf_MySqlConnectionManager.html", "cl": 37, "ucl": 11, "cal": 48, "tl": 77, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -346,12 +346,6 @@ var riskHotspotMetrics = [
 var riskHotspots = [
   {
     "assembly": "MicroServicioUsuario.API", "class": "Program", "reportPath": "MicroServicioUsuario.API_Program.html", "methodName": "\u003CMain\u003E$(System.String[])", "methodShortName": "\u003CMain\u003E$(...)", "fileIndex": 0, "line": 12,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.EmailAdapters.SmtpEmailAdapter", "reportPath": "MicroServicoUser.Inf_SmtpEmailAdapter.html", "methodName": "SendEmailAsync()", "methodShortName": "SendEmailAsync()", "fileIndex": 0, "line": 19,
     "metrics": [
       { "value": 42, "exceeded": true },
       { "value": 6, "exceeded": false },
