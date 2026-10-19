@@ -1194,6 +1194,19 @@ flowchart TD
 
 **Puntos de decisión:** ninguno.
 
+**Complejidad ciclomática y pruebas del ticket de Result<T>.Success:** el grafo tiene 3 nodos (N = 3), 2 aristas (E = 2) y un componente conectado (P = 1), por lo que `V(G) = E - N + 2P = 2 - 3 + 2(1) = 1`. Tiene 1 región (R = 1) y 0 nodos predicado (D = 0), así que `D + 1 = 1`; los tres métodos coinciden. No hay decisiones, retornos anticipados, bucles ni `try`. El único camino independiente es N1 → N2 → N3.
+
+El total de pruebas es 4. La prueba 1 cubre el camino único; las pruebas 2 a 4 verifican postcondiciones adicionales de la misma expresión (tipo valor, referencia nula y conservación de la instancia). No se añadieron caminos porque el método no tiene ramas.
+
+| Caso | Preparación → resultado esperado | Prueba | Propósito |
+|---|---|---|---|
+| 1 | Valor `"Usuario creado"` → `Success`, `Value` igual al valor, `Errors` vacío | `Success_WithValue_ReturnsSuccessWithThatValueAndNoErrors` | Camino único |
+| 2 | Valor `42` (tipo valor) → `Success` con `42` | `Success_WithValueType_ReturnsThatValue` | Tipo valor |
+| 3 | Valor `null` (`string?`) → `Success` con `Value` nulo | `Success_WithNullReferenceValue_ReturnsSuccessWithNullValue` | Referencia nula admitida |
+| 4 | Lista como valor → `Value` es la misma instancia | `Success_KeepsSameInstanceOfReferenceValue` | Conservación de la referencia |
+
+Las pruebas están en `MicroServicioUsuario.Tests/ResultGenericSuccessFactoryTests.cs`.
+
 ### Result&lt;T&gt;.Failure
 
 **Archivo:** MicroServices/MicroServicioUsuario.API/MicroServicioUser.Dom/Patterns/Result.cs  
