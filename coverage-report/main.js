@@ -327,7 +327,7 @@ var assemblies = [
       { "name": "MicroServicoUser.Inf.Persistence.MySqlConnectionDB", "rp": "MicroServicoUser.Inf_MySqlConnectionDB.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 25, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.AuthenticationRoles", "rp": "MicroServicoUser.Inf_AuthenticationRoles.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.IdDto", "rp": "MicroServicoUser.Inf_IdDto.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 243, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "MicroServicoUser.Inf.Repository.Login", "rp": "MicroServicoUser.Inf_Login.html", "cl": 18, "ucl": 42, "cal": 60, "tl": 97, "cb": 10, "tb": 34, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "MicroServicoUser.Inf.Repository.Login", "rp": "MicroServicoUser.Inf_Login.html", "cl": 39, "ucl": 21, "cal": 60, "tl": 97, "cb": 22, "tb": 34, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.Registration", "rp": "MicroServicoUser.Inf_Registration.html", "cl": 77, "ucl": 0, "cal": 77, "tl": 132, "cb": 37, "tb": 42, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.RegistrationHelpers", "rp": "MicroServicoUser.Inf_RegistrationHelpers.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 132, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "MicroServicoUser.Inf.Repository.UserRepository", "rp": "MicroServicoUser.Inf_UserRepository.html", "cl": 147, "ucl": 0, "cal": 147, "tl": 243, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -344,12 +344,6 @@ var riskHotspotMetrics = [
 ];
 
 var riskHotspots = [
-  {
-    "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Repository.Login", "reportPath": "MicroServicoUser.Inf_Login.html", "methodName": "ChangePassword()", "methodShortName": "ChangePassword()", "fileIndex": 0, "line": 15,
-    "metrics": [
-      { "value": 156, "exceeded": true },
-      { "value": 12, "exceeded": false },
-    ]},
   {
     "assembly": "MicroServicoUser.Inf", "class": "MicroServicoUser.Inf.Repository.Login", "reportPath": "MicroServicoUser.Inf_Login.html", "methodName": "ChangePasswordFirstLogin()", "methodShortName": "ChangePasswordFirstLogin()", "fileIndex": 0, "line": 50,
     "metrics": [
